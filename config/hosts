@@ -1,34 +1,30 @@
+; 密钥认证示例
 [work1]
-
+127.0.0.1
+192.168.163.200
 
 [work1:vars]
-ssh_port=
-ssh_user=
-ssh_rsa=
+ssh_port=22
+ssh_user=root
+ssh_authentication=key_filename
+ssh_rsa=/develop/python/server_status/chenyunzhong
 
-
+; 密码认证示例
 [work2]
-
+127.0.0.1
+192.168.163.200
 
 [work2:vars]
-ssh_port=
-ssh_user=
-ssh_rsa=
+ssh_port=22
+ssh_user=root
+ssh_authentication=password
+ssh_rsa=123456
 
+; ssh认证示例
+[work2]
+127.0.0.1
+192.168.163.200
 
-[aws1]
-
-
-[aws1:vars]
-ssh_port=
-ssh_user=
-ssh_rsa=
-
-[aws2]
-
-
-
-[aws2:vars]
-ssh_port=
-ssh_user=
-ssh_rsa=
+[work2:vars]
+ssh_port=22
+ssh_user=root
