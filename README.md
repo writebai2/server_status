@@ -30,8 +30,7 @@
 ssh_port=22
 ssh_user=root
 ssh_authentication=key_filename
-ssh_rsa=/develop/python/server_status/chenyunzhong
-
+ssh_rsa=/develop/python/server_status/密钥文件
 ; 密码认证示例
 [work2]
 127.0.0.1
