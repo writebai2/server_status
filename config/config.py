@@ -25,5 +25,4 @@ class Config():
                     for val in config.options(name):
                         tmp_arr.append(val)
                     host_val[f"{name}_host"] = tmp_arr
-
         return host_key, host_val

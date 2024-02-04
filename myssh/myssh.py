@@ -1,4 +1,4 @@
-from fabric2 import Connection
+from fabric import Connection
 
 
 class MyCmd():
@@ -25,7 +25,7 @@ class MyCmd():
                         connect_kwargs={
                             "password": self.passwd
                         },
-                        connect_timeout=self.timeout
+                        connect_timeout=self.timeout,
                     )
                 case 'key_filename':
                     conn = Connection(
@@ -44,7 +44,6 @@ class MyCmd():
                         connect_timeout=self.timeout
                     )
             conn.open()
-            conn.close()
             return conn
         except Exception:
             raise Exception('SSH conection is err')
@@ -83,7 +82,8 @@ class MyCmd():
         mem_free = round(int(os_ref.split(":")[1]) / 1024, 2)
         mem_buf = round(int(os_ref.split(":")[2]) / 1024, 2)
         percentage = round(100 - ((mem_free + mem_buf) / mem_total) * 100, 2)
-        ref_dict = {"mem_total": f"{mem_total}G", "mem_free": f"{mem_free}G", "percentage": f"{percentage}%"}
+        ref_dict = {"mem_total": f"{mem_total}G",
+                    "mem_free": f"{mem_free}G", "percentage": f"{percentage}%"}
         return ref_dict
 
     def server_cpu(self):
@@ -91,7 +91,8 @@ class MyCmd():
         cmd = "vmstat  | awk 'END {print $13 \":\" $14 \":\" $15}'"
         os_ref = self.excet_cmd(cmd)
         os_list = os_ref.split(":")
-        ref_dict = {"us": f"{os_list[0]}%", "sys": f"{os_list[1]}%", "idea": f"{os_list[2]}%"}
+        ref_dict = {
+            "us": f"{os_list[0]}%", "sys": f"{os_list[1]}%", "idea": f"{os_list[2]}%"}
         return ref_dict
 
     def server_cpu_load(self):
@@ -99,7 +100,8 @@ class MyCmd():
         cmd = "cat /proc/loadavg | awk '{print $1 \":\" $2 \":\" $3}'"
         os_ref = self.excet_cmd(cmd)
         os_list = os_ref.split(":")
-        ref_dict = {"1avg": os_list[0], "5avg": os_list[1], "15avg": os_list[2]}
+        ref_dict = {"1avg": os_list[0],
+                    "5avg": os_list[1], "15avg": os_list[2]}
         return ref_dict
 
     def server_disk(self):
@@ -114,7 +116,8 @@ class MyCmd():
             disk_total = round(float(os_list[0]) / num, 2)
             disk_free = round(float(os_list[1]) / num, 2)
             percentage = os_list[2]
-            ref_dict = {"disk_total": f'{disk_total}G', "disk_free": f'{disk_free}G', "percentage": percentage}
+            ref_dict = {"disk_total": f'{disk_total}G',
+                        "disk_free": f'{disk_free}G', "percentage": percentage}
             disk_dic = {"/": ref_dict}
         return disk_dic
 
